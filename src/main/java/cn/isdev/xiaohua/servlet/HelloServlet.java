@@ -9,10 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Properties;
@@ -86,6 +83,9 @@ public class HelloServlet extends HttpServlet {
 //            pst.setString(1, "123456");
 //            pst.setInt(2, 2);
             pst.executeUpdate();
+
+
+            ResultSet rs = pst.executeQuery();
         } catch (Exception e) {
             if (conn != null) {
                 try {

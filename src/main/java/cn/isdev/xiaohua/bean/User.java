@@ -11,6 +11,16 @@ public class User {
     private String password;
     private Date birth;
 
+    public User() {
+    }
+
+    public User(int id, String name, String password, Date birth) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+        this.birth = birth;
+    }
+
     public Date getBirth() {
         return birth;
     }

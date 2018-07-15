@@ -1,10 +1,17 @@
 package cn.isdev.xiaohua.servlet;
 
 import cn.isdev.xiaohua.bean.User;
+import cn.isdev.xiaohua.jdbc.UserDao;
+import cn.isdev.xiaohua.utils.JdbcUtils;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
+import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -12,10 +19,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.reflect.InvocationTargetException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.*;
 
 /**
  * Created by Administrator on 2018/7/15.
@@ -27,7 +39,106 @@ public class TestServlet extends HttpServlet {
         doPost(request, response);
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(final HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setContentType("text/html; charset= utf-8");
+//        beanUtils();
+//        useDao();
+//        DbUtilsBase(response);
+//        DbUtilsQueryOne(response);
+//        DbUtilsQueryMany(response);
+//        dbUtilsScalar(response);
+    }
+
+    private void dbUtilsScalar(HttpServletResponse response) throws IOException {
+        String sql = "select * from user";
+        Connection conn = JdbcUtils.getConn();
+        QueryRunner queryRunner = new QueryRunner();
+        List<Integer> query = new ArrayList<>();
+        try {
+            query = queryRunner.query(conn, sql, new ScalarHandler<List<Integer>>());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        response.getWriter().write(String.valueOf(query));
+    }
+
+    private void DbUtilsQueryMany(HttpServletResponse response) throws IOException {
+        String sql = "select * from user";
+        Connection conn = JdbcUtils.getConn();
+        QueryRunner queryRunner = new QueryRunner();
+        List<User> users = null;
+        try {
+            users = queryRunner.query(conn, sql, new BeanListHandler<User>(User.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        PrintWriter writer = response.getWriter();
+        writer.write(users.toString());
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void DbUtilsQueryOne(HttpServletResponse response) throws IOException {
+        String sql = "select * from user where id = ?";
+        Connection conn = JdbcUtils.getConn();
+        QueryRunner queryRunner = new QueryRunner();
+        User user = null;
+        try {
+            user = queryRunner.query(conn, sql, new BeanHandler<User>(User.class), 6);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        PrintWriter writer = response.getWriter();
+        writer.write(user.toString());
+    }
+
+    private void DbUtilsBase(HttpServletResponse response) throws IOException {
+        String sql = "select * from user";
+        Connection conn = JdbcUtils.getConn();
+        QueryRunner qr = new QueryRunner();
+        try {
+            List<User> userList = qr.query(conn, sql, new ResultSetHandler<List<User>>() {
+                @Override
+                public List<User> handle(ResultSet resultSet) throws SQLException {
+                    List<User> list = new ArrayList<>();
+                    ResultSetMetaData metaData = resultSet.getMetaData();
+                    int metaDataCount = metaData.getColumnCount();
+                    while(resultSet.next()) {
+                        User user = new User();
+                        for(int i=0; i<metaDataCount; i++){
+                            String columnName = metaData.getColumnName(i + 1);
+                            Object object = resultSet.getObject(columnName);
+                            try {
+                                BeanUtils.copyProperty(user, columnName, object);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                        list.add(user);
+                    }
+                    return list;
+                }
+            });
+
+            PrintWriter writer = response.getWriter();
+            writer.write("userList = " + userList);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void useDao() {
+        UserDao userDao = new UserDao();
+//        userDao.delete(4);
+//        userDao.save(new User(1,"小华", "wahaha123456", new Date()));
+        List<User> userList = userDao.getAll();
+        System.out.println(userList);
+    }
+
+    private void beanUtils() {
         User user = new User();
 //        ConvertUtils.register(new Converter() {
 //            @Override
@@ -66,7 +177,6 @@ public class TestServlet extends HttpServlet {
 
         System.out.println(user);
     }
-
 
 
 }
