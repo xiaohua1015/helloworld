@@ -64,7 +64,37 @@
         <url-pattern>/dbcpServlet</url-pattern>
     </servlet-mapping>
 
+   <!-- <filter>
+        <filter-name>HelloFilter</filter-name>
+        <filter-class>cn.isdev.xiaohua.filter.HelloFilter</filter-class>
+        <init-param>
+            <param-name>excludePages</param-name>
+            <param-value>/index.jsp, /register.html</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>HelloFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+        &lt;!&ndash;<dispatcher>FORWARD</dispatcher>&ndash;&gt;
+    </filter-mapping>-->
 
+    <!--<filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>cn.isdev.xiaohua.filter.EncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>-->
+
+    <listener>
+        <listener-class></listener-class>
+        <
+    </listener>
 
     <context-param>
         <param-name>contextParam</param-name>

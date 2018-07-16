@@ -43,7 +43,16 @@ public class TestServlet extends HttpServlet {
 //        DbUtilsBase(response);
 //        DbUtilsQueryOne(response);
 //        DbUtilsQueryMany(response);
-        dbUtilsScalar(response);
+//        dbUtilsScalar(response);
+        test(request, response);
+    }
+
+    private void test(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+//        response.sendRedirect(request.getContextPath()+"/cookie");
+//        request.getRequestDispatcher(request.getContextPath()+"cookie").forward(request, response);
+        String user = request.getParameter("user");
+        System.out.println("user = " + user);
+        response.getWriter().write("user = " + user);
     }
 
     private void dbUtilsScalar(HttpServletResponse response) throws IOException {

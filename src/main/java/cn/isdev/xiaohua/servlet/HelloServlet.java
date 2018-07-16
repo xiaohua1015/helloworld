@@ -64,8 +64,8 @@ public class HelloServlet extends HttpServlet {
         // 一会试试insert
 //        String sqlTrue = "update user set password = ? where id=?";
 //        String sqlFalse = "update1 user set password = ? where id=?";
-        String sqlTrue = "insert into user (username, password) values('小华', 'wahaha123456')";
-        String sqlFalse = "insert into user (username, password) values('小红', 'wahaha123456')";
+        String sqlTrue = "insert into user (user, password) values('小华', 'wahaha123456')";
+        String sqlFalse = "insert into user (user, password) values('小红', 'wahaha123456')";
         PreparedStatement pst = null;
         Connection conn = null;
         try {
