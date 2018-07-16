@@ -92,8 +92,13 @@
     </filter-mapping>-->
 
     <listener>
-        <listener-class></listener-class>
-        <
+        <listener-class>cn.isdev.xiaohua.listener.MyRequestListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>cn.isdev.xiaohua.listener.MyServletContentListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>cn.isdev.xiaohua.listener.MyHttpSessionListener</listener-class>
     </listener>
 
     <context-param>
