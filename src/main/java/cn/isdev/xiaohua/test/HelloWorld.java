@@ -1,10 +1,16 @@
 package cn.isdev.xiaohua.test;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.log4j.spi.LoggerFactory;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Properties;
 
 /**
  * Created by Administrator on 2018/7/14.
@@ -19,6 +25,15 @@ public class HelloWorld {
 
     public static void main(String[] args) {
 //        jdbc();
+//        collection();
+        Log log = LogFactory.getLog(HelloWorld.class);
+        log.debug("debug信息");
+        log.info("info信息");
+        log.warn("warn信息");
+        log.error("error信息");
+    }
+
+    private static void collection() {
         try {
             List<String> set = new ArrayList<>();
             System.out.println(set.add("123"));
@@ -48,4 +63,5 @@ public class HelloWorld {
             e.printStackTrace();
         }
     }
+
 }

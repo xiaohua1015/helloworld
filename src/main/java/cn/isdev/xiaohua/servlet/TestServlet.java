@@ -11,6 +11,8 @@ import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,7 +26,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2018/7/15.
@@ -50,9 +54,18 @@ public class TestServlet extends HttpServlet {
     private void test(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 //        response.sendRedirect(request.getContextPath()+"/cookie");
 //        request.getRequestDispatcher(request.getContextPath()+"cookie").forward(request, response);
-        String user = request.getParameter("user");
-        System.out.println("user = " + user);
-        response.getWriter().write("user = " + user);
+//        String user = request.getParameter("user");
+//        System.out.println("user = " + user);
+//        response.getWriter().write("user = " + user);
+        Log log = LogFactory.getLog(TestServlet.class);
+        try {
+            log.info("开始计算");
+            int tmp = 1/0;
+            log.info("计算结束");
+        } catch (Exception e) {
+            e.printStackTrace();
+            log.error("计算异常" , e);
+        }
     }
 
     private void dbUtilsScalar(HttpServletResponse response) throws IOException {
