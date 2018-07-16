@@ -1,9 +1,8 @@
 package cn.isdev.xiaohua.jdbc;
 
-import cn.isdev.xiaohua.utils.JdbcUtils;
+import cn.isdev.xiaohua.utils.JdbcUtilsBase;
 import org.apache.commons.beanutils.BeanUtils;
 
-import java.lang.reflect.InvocationTargetException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +16,7 @@ public class BaseDao {
     private ResultSet rs;
 
     public void update(String sql, Object[] paramsValue) {
-        conn = JdbcUtils.getConn();
+        conn = JdbcUtilsBase.getConn();
         if (conn == null) {
 //            throw new Exception("conn is null");
             System.out.println("conn is null");
@@ -37,14 +36,14 @@ public class BaseDao {
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
-            JdbcUtils.clossAll(conn, pst, null);
+            JdbcUtilsBase.clossAll(conn, pst, null);
         }
     }
 
     public <T> List<T> query(String sql, Object[] paramsValue, Class type) {
         List<T> list = new ArrayList<>();
         T t = null;
-        Connection conn = JdbcUtils.getConn();
+        Connection conn = JdbcUtilsBase.getConn();
         if (conn == null) {
             System.out.println("conn is null");
             return null;
@@ -74,7 +73,7 @@ public class BaseDao {
             e.printStackTrace();
             return null;
         }  finally {
-            JdbcUtils.clossAll(conn, pst, rs);
+            JdbcUtilsBase.clossAll(conn, pst, rs);
         }
     }
 

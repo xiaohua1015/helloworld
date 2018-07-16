@@ -2,10 +2,9 @@ package cn.isdev.xiaohua.servlet;
 
 import cn.isdev.xiaohua.bean.User;
 import cn.isdev.xiaohua.jdbc.UserDao;
-import cn.isdev.xiaohua.utils.JdbcUtils;
+import cn.isdev.xiaohua.utils.JdbcUtilsBase;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
-import org.apache.commons.beanutils.Converter;
 import org.apache.commons.beanutils.locale.converters.DateLocaleConverter;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
@@ -25,8 +24,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -46,25 +43,25 @@ public class TestServlet extends HttpServlet {
 //        DbUtilsBase(response);
 //        DbUtilsQueryOne(response);
 //        DbUtilsQueryMany(response);
-//        dbUtilsScalar(response);
+        dbUtilsScalar(response);
     }
 
     private void dbUtilsScalar(HttpServletResponse response) throws IOException {
         String sql = "select * from user";
-        Connection conn = JdbcUtils.getConn();
+        Connection conn = JdbcUtilsBase.getConn();
         QueryRunner queryRunner = new QueryRunner();
-        List<Integer> query = new ArrayList<>();
+        Integer id = 0;
         try {
-            query = queryRunner.query(conn, sql, new ScalarHandler<List<Integer>>());
+            id = queryRunner.query(conn, sql, new ScalarHandler<Integer>());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        response.getWriter().write(String.valueOf(query));
+        response.getWriter().write(String.valueOf(id));
     }
 
     private void DbUtilsQueryMany(HttpServletResponse response) throws IOException {
         String sql = "select * from user";
-        Connection conn = JdbcUtils.getConn();
+        Connection conn = JdbcUtilsBase.getConn();
         QueryRunner queryRunner = new QueryRunner();
         List<User> users = null;
         try {
@@ -83,7 +80,7 @@ public class TestServlet extends HttpServlet {
 
     private void DbUtilsQueryOne(HttpServletResponse response) throws IOException {
         String sql = "select * from user where id = ?";
-        Connection conn = JdbcUtils.getConn();
+        Connection conn = JdbcUtilsBase.getConn();
         QueryRunner queryRunner = new QueryRunner();
         User user = null;
         try {
@@ -97,7 +94,7 @@ public class TestServlet extends HttpServlet {
 
     private void DbUtilsBase(HttpServletResponse response) throws IOException {
         String sql = "select * from user";
-        Connection conn = JdbcUtils.getConn();
+        Connection conn = JdbcUtilsBase.getConn();
         QueryRunner qr = new QueryRunner();
         try {
             List<User> userList = qr.query(conn, sql, new ResultSetHandler<List<User>>() {
