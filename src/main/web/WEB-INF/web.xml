@@ -59,24 +59,33 @@
         <servlet-name>DBCPServlet</servlet-name>
         <servlet-class>cn.isdev.xiaohua.servlet.DBCPServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Faces Servlet</servlet-name>
+        <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DBCPServlet</servlet-name>
         <url-pattern>/dbcpServlet</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Faces Servlet</servlet-name>
+        <url-pattern>*.xhtml</url-pattern>
+    </servlet-mapping>
 
-   <!-- <filter>
-        <filter-name>HelloFilter</filter-name>
-        <filter-class>cn.isdev.xiaohua.filter.HelloFilter</filter-class>
-        <init-param>
-            <param-name>excludePages</param-name>
-            <param-value>/index.jsp, /register.html</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>HelloFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-        &lt;!&ndash;<dispatcher>FORWARD</dispatcher>&ndash;&gt;
-    </filter-mapping>-->
+    <!-- <filter>
+         <filter-name>HelloFilter</filter-name>
+         <filter-class>cn.isdev.xiaohua.filter.HelloFilter</filter-class>
+         <init-param>
+             <param-name>excludePages</param-name>
+             <param-value>/index.jsp, /register.html</param-value>
+         </init-param>
+     </filter>
+     <filter-mapping>
+         <filter-name>HelloFilter</filter-name>
+         <url-pattern>/*</url-pattern>
+         &lt;!&ndash;<dispatcher>FORWARD</dispatcher>&ndash;&gt;
+     </filter-mapping>-->
 
     <!--<filter>
         <filter-name>EncodingFilter</filter-name>
@@ -104,6 +113,10 @@
     <context-param>
         <param-name>contextParam</param-name>
         <param-value>刘先森</param-value>
+    </context-param>
+    <context-param>
+        <param-name>javax.faces.CONFIG_FILES</param-name>
+        <param-value>/faces-config.xml</param-value>
     </context-param>
 
     <welcome-file-list>
