@@ -1,5 +1,7 @@
 package cn.isdev.struts.bean;
 
+import javax.jws.soap.SOAPBinding;
+
 /**
  * Created by Administrator on 2018/7/18.
  */
@@ -7,6 +9,14 @@ public class UserEntity {
     private int id;
     private String name;
     private String password;
+
+    public UserEntity(){}
+
+    public UserEntity(int id, String name, String password) {
+        this.id = id;
+        this.name = name;
+        this.password = password;
+    }
 
     public int getId() {
         return id;
@@ -52,5 +62,14 @@ public class UserEntity {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 }
