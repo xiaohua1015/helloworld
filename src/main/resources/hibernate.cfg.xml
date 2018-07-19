@@ -12,8 +12,21 @@
         <property name="hibernate.show_sql">true</property>
         <property name="format_sql">true</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping resource="cn/isdev/struts/bean/UserEntity.hbm.xml"/>
-        <!--<mapping resource="cn/isdev/struts/bean/UserEntity.hbm.xml"/>-->
+        <property name="cache.use_second_level_cache">true</property>
+        <property name="hibernate.cache.use_query_cache">true</property>
+        <property name="hibernate.cache.region.factory_class">org.hibernate.cache.ehcache.internal.EhcacheRegionFactory</property>
+        <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+        <property name="hibernate.c3p0.min_size">2</property>
+        <property name="hibernate.c3p0.max_size">4</property>
+        <property name="hibernate.c3p0.timeout">5000</property>
+        <property name="hibernate.c3p0.max_statements">10</property>
+        <property name="hibernate.c3p0.idle_test_period">30000</property>
+        <property name="hibernate.c3p0.acquire_increment">2</property>
+
+        <mapping resource="cn/isdev/framework/bean/UserEntity.hbm.xml"/>
+        <mapping resource="cn/isdev/framework/bean/Dept.hbm.xml"/>
+        <mapping resource="cn/isdev/framework/bean/Employee.hbm.xml"/>
+        <!--<mapping resource="cn/isdev/framework/bean/UserEntity.hbm.xml"/>-->
 
       <!-- <property name="connection.username"/> -->
     <!-- <property name="connection.password"/> -->

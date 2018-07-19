@@ -1,6 +1,4 @@
-package cn.isdev.struts.bean;
-
-import javax.jws.soap.SOAPBinding;
+package cn.isdev.framework.bean;
 
 /**
  * Created by Administrator on 2018/7/18.

@@ -1,8 +1,9 @@
 package cn.isdev.xiaohua.servlet;
 
-import cn.isdev.struts.bean.UserEntity;
+import cn.isdev.framework.bean.UserEntity;
 import cn.isdev.xiaohua.bean.User;
 import cn.isdev.xiaohua.jdbc.UserDao;
+import cn.isdev.xiaohua.utils.HibernateUtils;
 import cn.isdev.xiaohua.utils.JdbcUtilsBase;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.beanutils.ConvertUtils;
@@ -15,10 +16,6 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
-import org.hibernate.query.NativeQuery;
-import org.hibernate.query.Query;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -68,11 +65,12 @@ public class TestServlet extends HttpServlet {
     }
 
     private void hibernateTest() {
-        UserEntity userEntity = new UserEntity(12, "小雷", "12345678");
+        /*UserEntity userEntity = new UserEntity(12, "小雷", "12345678");
         Configuration configuration = new Configuration();
         configuration.configure();
         SessionFactory sessionFactory = configuration.buildSessionFactory();
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.openSession();*/
+        Session session = HibernateUtils.getSession();
 //        try {
 //            session.beginTransaction();
 //            session.saveOrUpdate(userEntity);
@@ -81,8 +79,6 @@ public class TestServlet extends HttpServlet {
 //            session.getTransaction().rollback();
 //            e.printStackTrace();
 //        } finally {
-////            Session currentSession = sessionFactory.getCurrentSession();
-////            UserEntity user = session.get(UserEntity.class, 12);
 ////            System.out.println("get user = " + user);
 //            session.close();
 //        }
@@ -95,14 +91,22 @@ public class TestServlet extends HttpServlet {
 //        NativeQuery sqlQuery = session.createSQLQuery("select * from user where id = 12").addEntity(UserEntity.class);
 //        System.out.println("list = " + sqlQuery.list());
         // 分页查询
-        Query query = session.createQuery("from UserEntity");
+        /*Query query = session.createQuery("from UserEntity");
         query.setFirstResult(2);
         query.setMaxResults(4);
         List list = query.list();
-        System.out.println("list = " + list);
+        System.out.println("list = " + list);*/
+        Log log = LogFactory.getLog(TestServlet.class);
+        log.error("begin first query ");
+        UserEntity user = session.get(UserEntity.class, 12);
+        log.error("first query list = " + user);
+        log.error("begin second query ");
+        user = session.get(UserEntity.class, 12);
+        log.error("second query user = " + user);
+
 
         // 删除
-        try {
+        /*try {
             session.beginTransaction();
             UserEntity user = session.get(UserEntity.class, 42);
             if (user != null) {
@@ -112,7 +116,7 @@ public class TestServlet extends HttpServlet {
         } catch (Exception e) {
             session.getTransaction().rollback();
             e.printStackTrace();
-        }
+        }*/
 
         session.close();
     }
