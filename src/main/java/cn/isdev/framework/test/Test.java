@@ -10,6 +10,11 @@ import org.hibernate.Session;
 public class Test {
 
     public static void main(String[] args) {
+//        hibernateTest();
+
+    }
+
+    private static void hibernateTest() {
         Session session = HibernateUtils.getSession();
         Dept dept = session.get(Dept.class, 1);
         System.out.println("dept.employee = " + dept.getEmps());

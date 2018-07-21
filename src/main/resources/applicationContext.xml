@@ -1,7 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd ">
 
+    <!--<bean id="user" class="cn.isdev.framework.bean.User" scope="singleton" lazy-init="false" init-method="init" destroy-method="destroy">
+        <property name="id" value="1"/>
+        <property name="name" value="小华"/>
+        <property name="password" value="qwer123456"/>
+    </bean>
+
+    <bean name="pwd" class="java.lang.String">
+        <constructor-arg value="12345678"></constructor-arg>
+    </bean>
+    <bean id="userArgs" class="cn.isdev.framework.bean.User">
+        <constructor-arg value="2" index="0" type="int"></constructor-arg>
+        <constructor-arg value="小明" index="1" type="java.lang.String"></constructor-arg>
+        <constructor-arg ref="pwd" index="2" type="java.lang.String"></constructor-arg>
+    </bean>-->
+
+    <!--<bean name="userDao" class="cn.isdev.framework.dao.UserDao"></bean>-->
+
+    <!--<bean name="userAction" class="cn.isdev.framework.action.UserAction">
+        <property name="userService" ref="userService"/>
+    </bean>-->
+
+    <!--<bean name="userService" class="cn.isdev.framework.service.UserService" p:userDao-ref="userDao"/>
+    <bean name="userAction" class="cn.isdev.framework.action.UserAction" p:userService-ref="userService"/>-->
+    <!--<bean name="userService" class="cn.isdev.framework.service.UserService" autowire="byName"/>
+    <bean name="userAction" class="cn.isdev.framework.action.UserAction" autowire="byName"/>-->
+    <context:component-scan base-package="cn.isdev.framework"/>
 
 </beans>
