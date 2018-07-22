@@ -10,8 +10,7 @@ import org.hibernate.Session;
 public class Test {
 
     public static void main(String[] args) {
-//        hibernateTest();
-
+        hibernateTest();
     }
 
     private static void hibernateTest() {

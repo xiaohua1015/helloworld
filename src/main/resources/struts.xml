@@ -7,7 +7,7 @@
 <struts >
 
     <package name="test" extends="struts-default">
-        <action name="userAction" class="cn.isdev.framework.action.UserAction" method="save">
+        <action name="userAction" class="userAction" method="save">
             <result name="success">/framework/success.jsp</result>
         </action>
         <action name="userDelete" class="cn.isdev.framework.action.UserAction" method="delete">
