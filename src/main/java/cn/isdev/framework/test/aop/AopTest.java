@@ -8,7 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class AopTest {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test/bean.xml");
+        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test/aop.xml");
 //        IUserDao userDao = (IUserDao) context.getBean("userDao_proxy");
         IUserDao userDao = (IUserDao) context.getBean("userDao");
         userDao.save();
