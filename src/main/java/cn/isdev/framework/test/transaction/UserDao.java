@@ -2,6 +2,9 @@ package cn.isdev.framework.test.transaction;
 
 import cn.isdev.framework.bean.User;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Repository;
+
+import javax.annotation.Resource;
 
 /**
  * Created by Administrator on 2018/7/23.

@@ -11,6 +11,6 @@ public class transactionTest {
     public static void main(String[] args) {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("test/transaction.xml");
         UserService userService = (UserService) context.getBean("userService");
-        userService.save(new User("杨杨", "654321"));
+        userService.save(new User("杨杨1213", "654321"));
     }
 }
