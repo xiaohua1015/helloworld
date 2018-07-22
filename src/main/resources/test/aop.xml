@@ -9,7 +9,9 @@
     <bean id="userDao" class="cn.isdev.framework.test.aop.UserDao"/>
     <!--aop 配置-->
     <aop:config>
-        <aop:pointcut id="pt" expression="execution(* cn.isdev.framework.test.aop.*.*(..))"/>
+        <!--execution(方法类型（public\private可以省略） 返回类型（*） 方法名（cn.isdev.framework.test.aop.UserDao.*）参数(..))-->
+        <!--<aop:pointcut id="pt" expression="execution(* cn.isdev.framework.test.aop.*.*(..))"/>-->
+        <aop:pointcut id="pt" expression="execution(* set*(..))"/>
         <aop:aspect ref="aop">
             <aop:before method="begin" pointcut-ref="pt"/>
             <aop:after method="end" pointcut-ref="pt"/>

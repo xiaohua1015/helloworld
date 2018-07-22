@@ -20,6 +20,16 @@
         <deploymentDescriptor name="hibernate.cfg.xml" url="file://$MODULE_DIR$/src/main/resources/hibernate.cfg.xml" />
       </configuration>
     </facet>
+    <facet type="Spring" name="Spring">
+      <configuration>
+        <fileset id="fileset" name="Spring Application Context" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resources/bean-action.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/bean-dao.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/bean-service.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resources/applicationContext.xml</file>
+        </fileset>
+      </configuration>
+    </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7" inherit-compiler-output="false">
     <output url="file://$MODULE_DIR$/target/classes" />
@@ -83,5 +93,7 @@
     <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.9.1" level="project" />
     <orderEntry type="library" name="Maven: org.aspectj:aspectjweaver:1.9.1" level="project" />
     <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-jdbc:5.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-tx:5.0.7.RELEASE" level="project" />
   </component>
 </module>
